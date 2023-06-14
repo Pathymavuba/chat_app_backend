@@ -31,10 +31,14 @@ io.on("connection", (socket) => {
   // listen when a new newser join chat
   socket.on("newUser", (data) => {
     users.push(data);
-    // console.log(data)
+    console.log(data)
     io.emit("NewUserResponse", users);
   });
 
+  //listen when user typping
+  socket.on("typing", (data) => socket.broadcast.emit("typingReponse",data));
+
+  
   socket.on("disconnect", function () {
     console.log("a user is disconnected");
 
