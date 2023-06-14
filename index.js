@@ -4,11 +4,7 @@ require("dotenv").config();
 const app = express();
 const socketio = require("socket.io");
 
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-  })
-);
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", function (req, res) {
@@ -20,7 +16,7 @@ const server = app.listen(process.env.PORT || 3000, () => {
 });
 
 //create socket server
-const io = socketio(server);
+const io = socketio(server, { cors: { origin: "http://localhost:3000" } });
 
 io.on("connection", (socket) => {
   console.log(`${socket.id} user  is connected`);
@@ -29,3 +25,5 @@ io.on("connection", (socket) => {
     console.log("a user is disconnected");
   });
 });
+
+
