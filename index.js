@@ -23,7 +23,9 @@ io.on("connection", (socket) => {
 
   //listner for event messages
   socket.on("message",(data)=>{
-    console.log(data)
+    // console.log(data)
+    //send message to all Clients connected
+    io.emit("MessageResponse",data)
   })
 
   socket.on("deconnection", function () {
