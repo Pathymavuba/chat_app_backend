@@ -21,6 +21,11 @@ const io = socketio(server, { cors: { origin: "http://localhost:3000" } });
 io.on("connection", (socket) => {
   console.log(`${socket.id} user  is connected`);
 
+  //listner for event messages
+  socket.on("message",(data)=>{
+    console.log(data)
+  })
+
   socket.on("deconnection", function () {
     console.log("a user is disconnected");
   });
